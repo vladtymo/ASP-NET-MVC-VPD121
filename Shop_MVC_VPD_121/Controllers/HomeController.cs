@@ -6,6 +6,7 @@ namespace Shop_MVC_VPD_121.Controllers
 {
     public class HomeController : Controller
     {
+        // action methods
         public IActionResult Index()
         {
             // ... code ...

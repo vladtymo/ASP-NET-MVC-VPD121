@@ -1,0 +1,42 @@
+﻿@model List<Product>;
+
+<h1>Product List</h1>
+<p>You can manage all the available products here...</p>
+<hr />
+
+@* Razor Syntax: @{...C# code...} @if @for *@
+
+@*<ul>
+    @foreach (var p in Model)
+    {
+        <li>@p.Id: @p.Name @p.Price$</li>
+    }
+</ul>*@
+
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Price</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr class="align-middle">
+                <th scope="row">@p.Id</th>
+                <td>@p.Name</td>
+                <td>@p.Category</td>
+                <td>@p.Price$</td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@p.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>Count: @Model.Count</p>

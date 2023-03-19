@@ -7,3 +7,13 @@
         <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%"></div>
     </div>
 </div>
+
+@* Razor Syntax: @{...C# code...} @if @for *@
+
+@{
+    int number = 10;
+}
+
+@if(number > 5) {
+    <p>Number is bigger than 5!</p>
+}

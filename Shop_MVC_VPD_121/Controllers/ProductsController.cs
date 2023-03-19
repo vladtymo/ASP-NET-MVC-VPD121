@@ -26,6 +26,16 @@ namespace Shop_MVC_VPD_121.Controllers
             return View(products);
         }
 
+        public IActionResult Details(int id)
+        {
+            var item = products.FirstOrDefault(x => x.Id == id);
+
+            if (item == null)
+                return NotFound();
+
+            return View(item);
+        }
+
         public IActionResult Delete(int id)
         {
             var item = products.FirstOrDefault(x => x.Id == id);

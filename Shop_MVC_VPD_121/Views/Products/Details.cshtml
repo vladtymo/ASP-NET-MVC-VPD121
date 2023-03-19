@@ -1,0 +1,17 @@
+﻿@model Product;
+
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-pills card-header-pills">
+            <li class="nav-item">
+                <a class="nav-link bg-dark active" asp-action="Index">Back</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <p class="card-text">@Model.Category</p>
+        <p>Price: <span class="badge bg-primary">@Model.Price$</span></p>
+        <a href="#" class="btn btn-success">Buy</a>
+    </div>
+</div>

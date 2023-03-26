@@ -1,20 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shop_MVC_VPD_121.Models;
+using Shop_MVC_VPD_121.Data;
+using Shop_MVC_VPD_121.Entities;
 
 namespace Shop_MVC_VPD_121.Controllers
 {
     public class ProductsController : Controller
     {
-        static List<Product> products = new List<Product>()
+        // readonly - can initialize or set in constructor only
+        private readonly ShopDbContext context;
+        public ProductsController(ShopDbContext context)
         {
-            new Product() { Id = 1, Name = "MacBook Pro 2019", Price = 1300, Category = "Electronics" },
-            new Product() { Id = 2, Name = "Samsung S23 Ultra", Price = 950, Category = "Electronics" },
-            new Product() { Id = 3, Name = "Adidas T-Shirt", Price = 320, Category = "Clothes" },
-            new Product() { Id = 4, Name = "Google Glass 2", Price = 670, Category = "Accesories" }
-        };
-
-        public ProductsController()
-        {
+            this.context = context;
         }
 
         // GET: ~/products/index
@@ -22,13 +18,14 @@ namespace Shop_MVC_VPD_121.Controllers
         public IActionResult Index()
         {
             // get products from database
+            List<Product> products = context.Products.ToList();
 
             return View(products);
         }
 
         public IActionResult Details(int id)
         {
-            var item = products.FirstOrDefault(x => x.Id == id);
+            var item = context.Products.Find(id);
 
             if (item == null)
                 return NotFound();
@@ -38,12 +35,13 @@ namespace Shop_MVC_VPD_121.Controllers
 
         public IActionResult Delete(int id)
         {
-            var item = products.FirstOrDefault(x => x.Id == id);
+            var item = context.Products.Find(id);
 
             if (item == null)
                 return NotFound();
 
-            products.Remove(item);
+            context.Products.Remove(item);
+            context.SaveChanges(); // sumbit all changes to database
 
             return RedirectToAction("Index");
         }

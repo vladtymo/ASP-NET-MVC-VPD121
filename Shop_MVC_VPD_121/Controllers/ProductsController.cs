@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Shop_MVC_VPD_121.Data;
 using Shop_MVC_VPD_121.Entities;
 
@@ -13,12 +15,23 @@ namespace Shop_MVC_VPD_121.Controllers
             this.context = context;
         }
 
+        private void LoadCategories()
+        {
+            // ViewData dictionary colleciton
+            //ViewData["CategoryList"] = ...
+
+            // ViewBag - dynamic property collection
+            ViewBag.CategoryList = new SelectList(context.Categories.ToList(), "Id", "Name");
+        }
+
         // GET: ~/products/index
         [HttpGet] // by default
         public IActionResult Index()
         {
             // get products from database
-            List<Product> products = context.Products.ToList();
+
+            // Include() - LEFT JOIN operator
+            List<Product> products = context.Products.Include(x => x.Category).ToList();
 
             return View(products);
         }
@@ -37,6 +50,8 @@ namespace Shop_MVC_VPD_121.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            LoadCategories();
+
             return View();
         }
 
@@ -55,6 +70,33 @@ namespace Shop_MVC_VPD_121.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public IActionResult Edit(int id)
+        {
+            var product = context.Products.Find(id);
+            if (product == null) return NotFound();
+
+            LoadCategories();
+
+            return View(product);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Product product)
+        {
+            // TODO: add validation
+            if (!ModelState.IsValid)
+            {
+                return View("Edit");
+            }
+
+            // update product in the database
+            context.Products.Update(product);
+            context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
 
         public IActionResult Delete(int id)
         {

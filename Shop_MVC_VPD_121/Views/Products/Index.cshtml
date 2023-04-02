@@ -30,11 +30,12 @@
             <tr class="align-middle">
                 <th scope="row">@p.Id</th>
                 <td>@p.Name</td>
-                <td>@p.Category</td>
+                <td>@(p.Category?.Name ?? "not loaded")</td>
                 <td>@p.Price$</td>
                 <td>
                     <div class="btn-group" role="group">
                         <a asp-action="Details" asp-route-id="@p.Id" class="btn btn-secondary">Details</a>
+                         <a asp-action="Edit" asp-route-id="@p.Id" class="btn btn-warning">Edit</a>
                         <a asp-action="Delete" asp-route-id="@p.Id" class="btn btn-danger">Delete</a>
                     </div>
                 </td>

@@ -8,6 +8,6 @@
         public int CategoryId { get; set; }
 
         // ---------- navigation properties
-        public Category Category { get; set; }
+        public Category? Category { get; set; }
     }
 }

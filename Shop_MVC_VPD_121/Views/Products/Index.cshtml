@@ -2,6 +2,7 @@
 
 <h1>Product List</h1>
 <p>You can manage all the available products here...</p>
+<a asp-action="Create" class="btn btn-primary">Create New Product</a>
 <hr />
 
 @* Razor Syntax: @{...C# code...} @if @for *@
@@ -33,7 +34,7 @@
                 <td>@p.Price$</td>
                 <td>
                     <div class="btn-group" role="group">
-                        <a asp-action="Details" asp-route-id="@p.Id" class="btn btn-info">Details</a>
+                        <a asp-action="Details" asp-route-id="@p.Id" class="btn btn-secondary">Details</a>
                         <a asp-action="Delete" asp-route-id="@p.Id" class="btn btn-danger">Delete</a>
                     </div>
                 </td>

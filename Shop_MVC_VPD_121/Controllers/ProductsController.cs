@@ -14,7 +14,7 @@ namespace Shop_MVC_VPD_121.Controllers
         }
 
         // GET: ~/products/index
-        [HttpGet]
+        [HttpGet] // by default
         public IActionResult Index()
         {
             // get products from database
@@ -31,6 +31,29 @@ namespace Shop_MVC_VPD_121.Controllers
                 return NotFound();
 
             return View(item);
+        }
+
+        // open the page for create new product
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Product product)
+        {
+            // TODO: add validation
+            if (!ModelState.IsValid)
+            {
+                return View("Create");
+            }
+
+            // add to the database
+            context.Products.Add(product);
+            context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int id)

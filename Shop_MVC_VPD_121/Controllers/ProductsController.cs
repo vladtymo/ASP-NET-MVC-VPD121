@@ -22,6 +22,7 @@ namespace Shop_MVC_VPD_121.Controllers
 
             // ViewBag - dynamic property collection
             ViewBag.CategoryList = new SelectList(context.Categories.ToList(), "Id", "Name");
+            //ViewBag.Username = "vladtymo";
         }
 
         // GET: ~/products/index
@@ -58,9 +59,10 @@ namespace Shop_MVC_VPD_121.Controllers
         [HttpPost]
         public IActionResult Create(Product product)
         {
-            // TODO: add validation
+            // model validation
             if (!ModelState.IsValid)
             {
+                LoadCategories();
                 return View("Create");
             }
 
@@ -84,9 +86,9 @@ namespace Shop_MVC_VPD_121.Controllers
         [HttpPost]
         public IActionResult Edit(Product product)
         {
-            // TODO: add validation
             if (!ModelState.IsValid)
             {
+                LoadCategories();
                 return View("Edit");
             }
 

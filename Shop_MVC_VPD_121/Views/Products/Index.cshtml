@@ -19,8 +19,10 @@
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
+            <th scope="col">Availability</th>
             <th scope="col">Category</th>
             <th scope="col">Price</th>
+            <th scope="col">Discount</th>
             <th scope="col">Actions</th>
         </tr>
     </thead>
@@ -30,12 +32,23 @@
             <tr class="align-middle">
                 <th scope="row">@p.Id</th>
                 <td>@p.Name</td>
+                <td>
+                    @if(p.InStock)
+                    {
+                        <span class="badge bg-success">In Stock</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Out of Stock</span>
+                    }
+                </td>
                 <td>@(p.Category?.Name ?? "not loaded")</td>
                 <td>@p.Price$</td>
+                <td>@(p.Discount ?? 0)%</td>
                 <td>
                     <div class="btn-group" role="group">
                         <a asp-action="Details" asp-route-id="@p.Id" class="btn btn-secondary">Details</a>
-                         <a asp-action="Edit" asp-route-id="@p.Id" class="btn btn-warning">Edit</a>
+                        <a asp-action="Edit" asp-route-id="@p.Id" class="btn btn-warning">Edit</a>
                         <a asp-action="Delete" asp-route-id="@p.Id" class="btn btn-danger">Delete</a>
                     </div>
                 </td>

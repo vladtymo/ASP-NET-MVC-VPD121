@@ -6,32 +6,38 @@
     <div class="col-md-12">
         <label asp-for="Name" class="form-label">Name</label>
         <input asp-for="Name" type="text" class="form-control" placeholder="Enter product name">
+        <span asp-validation-for="Name" class="form-text text-danger"></span>
     </div>
     <div class="col-md-6">
         <label asp-for="Price" class="form-label">Price</label>
         <input asp-for="Price" type="number" class="form-control" placeholder="Enter product price">
+        <span asp-validation-for="Price" class="form-text text-danger"></span>
     </div>
     <div class="col-md-6">
-        <label class="form-label">Discount</label>
-        <input type="number" class="form-control" placeholder="Enter product discount">
+        <label asp-for="Discount" class="form-label">Discount</label>
+        <input asp-for="Discount" type="number" class="form-control" placeholder="Enter product discount">
+        <span asp-validation-for="Discount" class="form-text text-danger"></span>
     </div>
     <div class="col-md-12">
-      <label class="form-label">Description</label>
-        <textarea class="form-control" placeholder="Enter product description" rows="3"></textarea>
+        <label asp-for="Description" class="form-label">Description</label>
+        <textarea asp-for="Description" class="form-control" placeholder="Enter product description" rows="3"></textarea>
+        <span asp-validation-for="Description" class="form-text text-danger"></span>
     </div>
     <div class="col-md-12">
         <label asp-for="CategoryId" class="form-label">Category</label>
         <select asp-for="CategoryId" asp-items="@ViewBag.CategoryList" class="form-select">
             <option disabled selected>Choose...</option>
         </select>
+        <span asp-validation-for="CategoryId" class="form-text text-danger"></span>
     </div>
     <div class="col-12">
         <div class="form-check">
-            <input class="form-check-input" type="checkbox">
-            <label class="form-check-label">
+            <input asp-for="InStock" class="form-check-input" type="checkbox">
+            <label asp-for="InStock" class="form-check-label">
                 In Stock
             </label>
         </div>
+        <span asp-validation-for="InStock" class="form-text text-danger"></span>
     </div>
     <div class="col-6">
         <a asp-action="Index" class="btn btn-dark w-100">Back</a>

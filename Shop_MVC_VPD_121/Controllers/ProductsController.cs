@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Data;
+using Data.Entities;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Shop_MVC_VPD_121.Data;
-using Shop_MVC_VPD_121.Entities;
 
 namespace Shop_MVC_VPD_121.Controllers
 {

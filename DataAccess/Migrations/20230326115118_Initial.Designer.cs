@@ -4,11 +4,10 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Shop_MVC_VPD_121.Data;
 
 #nullable disable
 
-namespace Shop_MVC_VPD_121.Migrations
+namespace Data.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
     [Migration("20230326115118_Initial")]

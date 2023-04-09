@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Shop_MVC_VPD_121.Entities
+namespace Data.Entities
 {
     public class Product
     {

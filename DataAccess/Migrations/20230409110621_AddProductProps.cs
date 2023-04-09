@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Shop_MVC_VPD_121.Migrations
+namespace Data.Migrations
 {
     public partial class AddProductProps : Migration
     {

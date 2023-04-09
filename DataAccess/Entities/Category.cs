@@ -1,4 +1,4 @@
-﻿namespace Shop_MVC_VPD_121.Entities
+﻿namespace Data.Entities
 {
     public class Category
     {

@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Shop_MVC_VPD_121.Data;
+using Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

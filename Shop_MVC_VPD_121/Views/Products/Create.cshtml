@@ -30,6 +30,11 @@
         </select>
         <span asp-validation-for="CategoryId" class="form-text text-danger"></span>
     </div>
+    <div class="col-md-12">
+        <label asp-for="ImageUrl" class="form-label">Image URL</label>
+        <input asp-for="ImageUrl" type="text" class="form-control" placeholder="Enter product image URL">
+        <span asp-validation-for="ImageUrl" class="form-text text-danger"></span>
+    </div>
     <div class="col-12">
         <div class="form-check">
             <input asp-for="InStock" class="form-check-input" type="checkbox">

@@ -15,7 +15,7 @@
                 <div class="card-body text-center">
                     <h5 class="card-title">@p.Name</h5>
                     <p class="card-text">@(p.Category?.Name ?? "no data") <span class="badge bg-primary">@p.Price$</span></p>
-                    <a href="#" class="btn btn-outline-success">Add to Cart</a>
+                    <a asp-controller="Cart" asp-action="Add" asp-route-id="@p.Id" class="btn btn-outline-success">Add to Cart</a>
                 </div>
             </div>
         </div>

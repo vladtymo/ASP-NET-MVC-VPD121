@@ -23,7 +23,12 @@
                                 <span class="badge bg-primary">SALE @p.Discount%</span>
                             }
                         </div>
-                        <span class="badge bg-secondary">@p.Price$</span>
+                        <div>
+                            <span class="badge bg-dark">@p.Price$</span>
+                            <a asp-action="Remove" asp-route-id="@p.Id" class="text-danger">
+                                <i class="bi bi-trash-fill"></i>
+                            </a>
+                        </div>
                     </li>
                 }
             </ol>
@@ -35,7 +40,7 @@
 
     </div>
     <div class="card-footer text-muted d-flex justify-content-between">
-        <div>Count: @Model.Count</div>
-        <div>Total: @Model.Sum(x => x.Price)$</div>
+        <div>Count: <span class="badge bg-secondary">@Model.Count</span></div>
+        <div>Total: <span class="badge bg-secondary">@Model.Sum(x => x.Price)$</span></div>
     </div>
 </div>

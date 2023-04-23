@@ -12,6 +12,8 @@ namespace Data.Entities
         [Range(0, int.MaxValue, ErrorMessage = "Price must be greather than 0.")]
         public decimal Price { get; set; }
 
+        public string? ImageUrl { get; set; }
+
         public int CategoryId { get; set; }
 
         [Range(1, int.MaxValue, ErrorMessage = "Discount must be greather than 0.")]

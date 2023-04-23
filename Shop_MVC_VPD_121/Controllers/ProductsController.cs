@@ -3,6 +3,8 @@ using Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
+using Shop_MVC_VPD_121.Helpers;
 
 namespace Shop_MVC_VPD_121.Controllers
 {
@@ -45,6 +47,16 @@ namespace Shop_MVC_VPD_121.Controllers
                 return NotFound();
 
             return View(item);
+        }
+
+        public IActionResult Sort(string property)
+        {
+            List<Product> products = context.Products
+                .Include(x => x.Category)
+                .OrderBy(property)
+                .ToList();
+
+            return View("Index", products);
         }
 
         // open the page for create new product

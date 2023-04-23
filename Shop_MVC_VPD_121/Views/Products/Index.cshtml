@@ -5,6 +5,26 @@
 <a asp-action="Create" class="btn btn-primary">Create New Product</a>
 <hr />
 
+<form class="row g-3">
+    <div class="col input-group mb-3">
+        <label class="input-group-text" for="sortSelect">Sort By</label>
+        <select class="form-select" id="sortSelect" onchange="SortIndexChanged()">
+            <option selected>Id</option>
+            <option>Name</option>
+            <option>Price</option>
+        </select>
+    </div>
+    <div class="col input-group mb-3">
+        <label class="input-group-text" for="filterSelect">Filter By</label>
+        <select class="form-select" id="filterSelect">
+            <option selected>None</option>
+            <option value="1">Availability</option>
+            <option value="2">Discount</option>
+            <option value="3">Category</option>
+        </select>
+    </div>
+</form>
+
 @* Razor Syntax: @{...C# code...} @if @for *@
 
 @*<ul>
@@ -58,3 +78,17 @@
 </table>
 
 <p>Count: @Model.Count</p>
+
+@section Scripts 
+{
+    <script type="text/javascript">
+        function SortIndexChanged() {
+            const prop = sortSelect.value;
+
+            $.ajax({
+                url: '/products/sort',
+                data: { property: prop }
+            });
+        }
+    </script>  
+}

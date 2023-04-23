@@ -16,3 +16,9 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.product-card img {
+    height: 200px;
+    object-fit: contain;
+    padding: 10px 10px 10px 0;
+}

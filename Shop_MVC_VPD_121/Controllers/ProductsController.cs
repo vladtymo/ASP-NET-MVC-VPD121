@@ -5,9 +5,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using Shop_MVC_VPD_121.Helpers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Shop_MVC_VPD_121.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductsController : Controller
     {
         // readonly - can initialize or set in constructor only
@@ -29,6 +31,7 @@ namespace Shop_MVC_VPD_121.Controllers
 
         // GET: ~/products/index
         [HttpGet] // by default
+        [AllowAnonymous]
         public IActionResult Index()
         {
             // get products from database
@@ -39,6 +42,7 @@ namespace Shop_MVC_VPD_121.Controllers
             return View(products);
         }
 
+        [AllowAnonymous]
         public IActionResult Details(int id)
         {
             var item = context.Products.Find(id);

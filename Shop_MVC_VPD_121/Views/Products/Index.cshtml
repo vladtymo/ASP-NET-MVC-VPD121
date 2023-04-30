@@ -67,9 +67,15 @@
                 <td>@(p.Discount ?? 0)%</td>
                 <td>
                     <div class="btn-group" role="group">
-                        <a asp-action="Details" asp-route-id="@p.Id" class="btn btn-secondary">Details</a>
-                        <a asp-action="Edit" asp-route-id="@p.Id" class="btn btn-warning">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@p.Id" class="btn btn-danger">Delete</a>
+                        <a asp-action="Details" asp-route-id="@p.Id" class="btn btn-secondary">
+                            <i class="bi bi-eye"></i>
+                        </a>
+                        <a asp-action="Edit" asp-route-id="@p.Id" class="btn btn-warning">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@p.Id" class="btn btn-danger">
+                            <i class="bi bi-trash"></i>
+                        </a>
                     </div>
                 </td>
             </tr>

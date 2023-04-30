@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Data;
 using Shop_MVC_VPD_121.Services;
+using Microsoft.AspNetCore.Identity;
+using DataAccess.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,9 @@ string connStr = builder.Configuration.GetConnectionString("LocalDb");
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ShopDbContext>(x => x.UseSqlServer(connStr));
+
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<ShopDbContext>();
 builder.Services.AddHttpContextAccessor();
 
 // add custom services
@@ -40,11 +45,13 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
 
 app.UseSession();
 
+app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

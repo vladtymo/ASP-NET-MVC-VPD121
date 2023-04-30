@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Shop_MVC_VPD_121.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")] // give an access to admins only
     public class ProductsController : Controller
     {
         // readonly - can initialize or set in constructor only
@@ -31,7 +31,7 @@ namespace Shop_MVC_VPD_121.Controllers
 
         // GET: ~/products/index
         [HttpGet] // by default
-        [AllowAnonymous]
+        [AllowAnonymous] // give an access to any users
         public IActionResult Index()
         {
             // get products from database

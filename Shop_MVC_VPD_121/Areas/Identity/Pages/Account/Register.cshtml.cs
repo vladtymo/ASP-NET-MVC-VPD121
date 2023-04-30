@@ -85,6 +85,9 @@ namespace Shop_MVC_VPD_121.Areas.Identity.Pages.Account
             [Display(Name = "Date of Birth")]
             public DateTime Birthdate { get; set; }
 
+            [Display(Name = "Admin")]
+            public bool IsAdmin { get; set; } = false;
+
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -127,7 +130,10 @@ namespace Shop_MVC_VPD_121.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "User");
+                    if (Input.IsAdmin && User.IsInRole("Admin"))
+                        await _userManager.AddToRoleAsync(user, "Admin");
+                    else
+                        await _userManager.AddToRoleAsync(user, "User");
 
                     _logger.LogInformation("User created a new account with password.");
 

@@ -32,6 +32,17 @@
                 <label asp-for="Input.ConfirmPassword"></label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
+            @if(User.IsInRole("Admin"))
+            {
+                <div>
+                    <div class="checkbox mt-2">
+                        <label asp-for="Input.IsAdmin" class="form-label">
+                            <input class="form-check-input" asp-for="Input.IsAdmin" />
+                            @Html.DisplayNameFor(m => m.Input.IsAdmin)
+                        </label>
+                    </div>
+                </div>
+            }
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary my-2">Register</button>
         </form>
     </div>

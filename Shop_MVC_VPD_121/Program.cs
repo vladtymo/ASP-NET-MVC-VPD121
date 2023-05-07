@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using DataAccess.Entities;
 using System.Data;
 using Shop_MVC_VPD_121.Models;
+using Shop_MVC_VPD_121.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,43 +42,13 @@ var app = builder.Build();
 // seed admin user
 using (var scope = app.Services.CreateScope())
 {
-    // seed roles
     var serviceProvider = scope.ServiceProvider;
-
-    var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-
-    foreach (var role in Enum.GetNames(typeof(Roles)))
-    {
-        if (!await roleManager.RoleExistsAsync(role))
-        {
-            await roleManager.CreateAsync(new IdentityRole(role));
-        }
-    }
+    // seed roles
+    serviceProvider.SeedRoles().Wait(); //SeedExtensions.SeedRoles(serviceProvider);
 
     // seed admin
-    var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
-
-    const string USERNAME = "myadmin@myadmin.com";
-    const string PASSWORD = "Admin1@";
-
-    var existingUser = userManager.FindByNameAsync(USERNAME).Result;
-
-    if (existingUser == null)
-    {
-        var user = new User
-        {
-            UserName = USERNAME,
-            Email = USERNAME,
-        };
-
-        var result = userManager.CreateAsync(user, PASSWORD).Result;
-        if (result.Succeeded)
-        {
-            userManager.AddToRoleAsync(user, "Admin").Wait();
-        }
-    }
+    serviceProvider.SeedAdmin().Wait();
 }
-
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

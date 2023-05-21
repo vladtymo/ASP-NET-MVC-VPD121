@@ -9,7 +9,7 @@ using Shop_MVC_VPD_121.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
-string connStr = builder.Configuration.GetConnectionString("LocalDb");
+string connStr = builder.Configuration.GetConnectionString("AzureDb");
 
 // Configure Dependency Injection (DI) services 
 

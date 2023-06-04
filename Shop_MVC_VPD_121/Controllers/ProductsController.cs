@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using Shop_MVC_VPD_121.Helpers;
 using Microsoft.AspNetCore.Authorization;
+using Shop_MVC_VPD_121.Models;
+using Shop_MVC_VPD_121.Services;
 
 namespace Shop_MVC_VPD_121.Controllers
 {
@@ -14,9 +16,12 @@ namespace Shop_MVC_VPD_121.Controllers
     {
         // readonly - can initialize or set in constructor only
         private readonly ShopDbContext context;
-        public ProductsController(ShopDbContext context)
+        private readonly IAzureStorageService storageService;
+
+        public ProductsController(ShopDbContext context, IAzureStorageService storageService)
         {
             this.context = context;
+            this.storageService = storageService;
         }
 
         private void LoadCategories()
@@ -73,7 +78,7 @@ namespace Shop_MVC_VPD_121.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Product product)
+        public async Task<IActionResult> Create(CreateProductModel product)
         {
             // model validation
             if (!ModelState.IsValid)
@@ -82,9 +87,24 @@ namespace Shop_MVC_VPD_121.Controllers
                 return View("Create");
             }
 
+            // create product entity object
+            Product entity = new()
+            {
+                Name = product.Name,
+                Price = product.Price,
+                CategoryId = product.CategoryId,
+                Description = product.Description,
+                InStock = product.InStock,
+                Discount = product.Discount
+            };
+
+            // upload image to storage
+            if (product.Image != null)
+                entity.ImageUrl = await storageService.UploadAsync(product.Image);
+
             // add to the database
-            context.Products.Add(product);
-            context.SaveChanges();
+            context.Products.Add(entity);
+            await context.SaveChangesAsync();
 
             return RedirectToAction("Index");
         }

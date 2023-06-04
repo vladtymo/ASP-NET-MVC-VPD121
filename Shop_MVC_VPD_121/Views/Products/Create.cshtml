@@ -1,8 +1,8 @@
-﻿@model Data.Entities.Product;
+﻿@model Shop_MVC_VPD_121.Models.CreateProductModel;
 
 <h1>Create New Product</h1>
 
-<form asp-action="Create" method="post" class="row g-3">
+<form asp-action="Create" method="post" enctype="multipart/form-data" class="row g-3">
     <div class="col-md-12">
         <label asp-for="Name" class="form-label">Name</label>
         <input asp-for="Name" type="text" class="form-control" placeholder="Enter product name">
@@ -30,10 +30,15 @@
         </select>
         <span asp-validation-for="CategoryId" class="form-text text-danger"></span>
     </div>
-    <div class="col-md-12">
+   @* <div class="col-md-12">
         <label asp-for="ImageUrl" class="form-label">Image URL</label>
         <input asp-for="ImageUrl" type="text" class="form-control" placeholder="Enter product image URL">
         <span asp-validation-for="ImageUrl" class="form-text text-danger"></span>
+    </div>*@
+    <div class="col-md-12">
+        <label asp-for="Image" class="form-label">Image</label>
+        <input asp-for="Image" type="file" class="form-control">
+        <span asp-validation-for="Image" class="form-text text-danger"></span>
     </div>
     <div class="col-12">
         <div class="form-check">

@@ -9,7 +9,7 @@ using Shop_MVC_VPD_121.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
-string connStr = builder.Configuration.GetConnectionString("AzureDb");
+string connStr = builder.Configuration.GetConnectionString("LocalDb");
 
 // Configure Dependency Injection (DI) services 
 
@@ -27,6 +27,7 @@ builder.Services.AddHttpContextAccessor();
 
 // add custom services
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IAzureStorageService, AzureStorageService>();
 
 builder.Services.AddDistributedMemoryCache();
 
